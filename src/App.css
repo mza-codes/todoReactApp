@@ -14,7 +14,14 @@
 }
 
 .m-custom{
-  /* padding: 0.5rem; */
+  padding: 0.5rem;
+}
+.text-dark{
+  color: black !important;
+}
+
+.success {
+  text-align: center;
 }
 
 .bg{

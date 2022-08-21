@@ -12,7 +12,7 @@ function App() {
 
   const [toDo, setTodo] = useState('')
   const [toDos, setTodoValues] = useState([])
-
+  const [state, setState] = useState(false)
   return (
     <div className="app">
       <div className='title'>
@@ -43,23 +43,40 @@ function App() {
                   <p key={data.id}>{data.text}</p>
                 </div>
                 <div className="right">
-                  <i className="fas fa-times"></i>
+                  <i onClick={() => {
+                    setTodoValues(toDos.filter(dataServer => {
+                      if (dataServer.id === data.id) {
+                        dataServer = null
+                      }
+                      return dataServer;
+                    }))
+                  }} className="fas fa-times"></i>
                 </div>
-
               </div>
             )
           })
         }
+        <p onClick={() => { setState(!state) }} className='bg text-dark times m-custom'>Completed Tasks</p>
         {toDos.map((data2) => {
-          if (data2.status) {
+          if (state) {
+            if (data2.status) {
             return (
-              <h1>{data2.text}</h1>
+              <div className='todo success'>
+                <p className='m-custom times'>{data2.text}</p>
+                <div className="right">
+                  <i className="fa">🎉</i>
+                </div>
+              </div>
             )
-          }else{
+            }else {
+              return null
+            }
+          } else {
             return null
           }
 
         })}
+
       </div>
     </div>
   );
